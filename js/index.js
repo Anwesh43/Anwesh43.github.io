@@ -13,5 +13,5 @@ window.onload = function() {
     }
 };
 window.onmousedown = function(event) {
-    rects.push({x:event.pageX,event.pageY,deg:0,rot:0,draw:function(ctx){ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.deg*Math.PI/180);ctx.fillRect(-50,-50,100,100);ctx.restore();},move:function(){this.deg+=10;}});
+    rects.push({x:event.pageX,y:event.pageY,deg:0,rot:0,draw:function(ctx){ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.deg*Math.PI/180);ctx.fillRect(-50,-50,100,100);ctx.restore();},move:function(){this.deg+=10;}});
 };
