@@ -1,3 +1,4 @@
-setInterval(function(){
-    postMessage('hello');
-},1000);
+function update() {
+    setTimeout("update()",1000);
+}
+update();
