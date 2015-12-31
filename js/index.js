@@ -7,6 +7,7 @@ window.onload = function() {
     var worker = new Worker('CanvWorker.js');
     worker.onmessage = function(event) {
         context.clearRect(0,0,1000,600);
+        console.log(rects);
         rects.forEach(function(rect,index){
             rect.draw(context);
             rect.move();
