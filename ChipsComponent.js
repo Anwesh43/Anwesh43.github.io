@@ -8,7 +8,7 @@ export default class ChipsComponent extends React.Component {
     render() {
         var chips = this.state.contacts.map((chip)=><Chip><a href={chip.href} target="_blank"><img src={chip.img}/></a>{chip.channel}</Chip>)
         return (<Row>
-          <Col s={8} l={6} className="offset-s4 offset-l5">
+          <Col s={8} l={6} className="offset-s3 offset-l5">
               {chips}
           </Col>
           </Row>);
