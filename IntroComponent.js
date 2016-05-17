@@ -14,7 +14,7 @@ export default class IntroComponent extends React.Component {
               </Col>
               <Col s={10}>
                 <span className="black-text">
-                  Hi I am Anwesh Mishra a full stack developer. I take life as it comes.Please check my contact details below skills below.
+                  Hi I am Anwesh Mishra a full stack developer. I take life as it comes.Please check my contact details and skills below.
                 </span>
               </Col>
             </Row>

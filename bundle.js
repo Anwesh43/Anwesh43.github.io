@@ -229,7 +229,7 @@ var IntroComponent = function (_React$Component) {
                 _react2.default.createElement(
                   'span',
                   { className: 'black-text' },
-                  'Hi I am Anwesh Mishra a full stack developer. I take life as it comes.Please check my contact details below skills below.'
+                  'Hi I am Anwesh Mishra a full stack developer. I take life as it comes.Please check my contact details and skills below.'
                 )
               )
             )
