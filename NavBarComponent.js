@@ -7,7 +7,7 @@ export default class NavBarComponent extends React.Component {
     }
     render() {
         var navBarItems = this.state.links.map((link)=><NavItem href={link.href}>{link.title}</NavItem>)
-        return (<Navbar brand="Anwesh Mishra" right>
+        return (<Navbar brand="Anwesh43" right>
             {navBarItems}
         </Navbar>);
     }
