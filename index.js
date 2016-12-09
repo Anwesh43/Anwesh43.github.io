@@ -8,10 +8,14 @@ import IntroComponent from './IntroComponent'
 import SliderComponent from './SliderComponent'
 import NavBarComponent from './NavBarComponent'
 import ChipsComponent from './ChipsComponent'
+import Smooch from 'smooch'
 class FinalComponent extends React.Component {
       constructor(props) {
           super(props);
           this.state = {names:["A1","A2","A3","A4","A5","A6"]};
+      }
+      componentDidMount() {
+          Smooch.init({appToken:'acxwrzxvem09nr2s61lebpf54'})
       }
       render() {
           return (<div>
