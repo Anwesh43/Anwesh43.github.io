@@ -1,0 +1,93 @@
+<head>
+</head>
+<body>
+<script>
+  var imgs = []
+  var colors = ["#039BE5","#009688","#E91E63","#283593","#00E676","#00B0FF","#FF5722","#FFC107","#e53935","#7E57C2","#e53935"]
+  var background_color = colors[0]
+  var divs = []
+  var j = -1
+  for(var i=0;i<colors.length;i++) {
+      var color = colors[i]
+      var div = document.createElement('div')
+      div.style.float = 'left'
+      div.style.background = color
+      div.style.borderRadius = 50
+      div.style.width = 128
+      div.style.height = 128
+      document.body.appendChild(div)
+      div.onclick = function() {
+          background_color = this.style.background
+          draw()
+      }
+  }
+  var image = new Image()
+
+  var fileInput = document.createElement('input')
+  fileInput.type = 'file'
+  fileInput.onchange = function(event){
+    console.log(event);
+    var files = event.target.files;
+    var file = files[0];
+    var fr = new FileReader();
+    fr.readAsDataURL(file);
+    fr.onloadend = function(data){
+      var img = new Image()
+      console.log(data)
+      img.src=fr.result
+      img.width = 256
+      img.height = 256
+      imgs.push({img,x:100,y:100})
+      j++
+      draw()
+    }
+  }
+  fileInput.style.position = 'relative'
+
+  document.body.appendChild(fileInput)
+  var saveBtn = document.createElement('button')
+  saveBtn.innerHTML = "Save"
+  document.body.appendChild(saveBtn)
+  saveBtn.onclick = function() {
+     var image = new Image()
+     image.src = canvas.toDataURL()
+
+  }
+  var canvas = document.createElement('canvas')
+  canvas.width = 1024
+  canvas.height = 1024
+  var ctx = canvas.getContext('2d')
+  document.body.appendChild(canvas)
+
+  image.width = 1024
+  image.height = 1024
+  document.body.appendChild(image)
+  function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height)
+      ctx.fillStyle = background_color
+      ctx.fillRect(0,0,canvas.width,canvas.height)
+      imgs.forEach((image)=>{
+        ctx.drawImage(image.img,image.x,image.y,256,256)
+      })
+  }
+  var isDown = false
+  canvas.onmousedown = function(event) {
+    if(!isDown) {
+       isDown = true
+    }
+  }
+  canvas.onmousemove = function(event) {
+    if(isDown) {
+       imgs[j].x = event.pageX - canvas.offsetLeft
+       imgs[j].y = event.pageY - canvas.offsetTop
+       draw()
+    }
+  }
+  canvas.onmouseup = function(event) {
+    if(isDown) {
+      isDown = false
+    }
+  }
+  draw()
+</script>
+</body>
