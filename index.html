@@ -1,21 +1,692 @@
-<html>
-    <head>
-        <!--Import Google Icon Font-->
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/main.css"/>
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anwesh Mishra — Full Stack Developer</title>
+  <meta name="description" content="Anwesh Mishra — full stack developer working across React, Angular, Node.js, Go, MongoDB and Android." />
+  <meta name="theme-color" content="#0B1116" />
 
-    <body class='deep-purple'>
-        <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <div id="tik">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Anwesh Mishra — Full Stack Developer" />
+  <meta property="og:description" content="Full stack developer working across React, Angular, Node.js, Go, MongoDB and Android." />
+  <meta property="og:image" content="img/anweshm.jpg" />
+
+  <link rel="icon" href="img/anweshm.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: {
+              DEFAULT: '#0B1116',
+              950: '#070B0E',
+              900: '#0B1116',
+              800: '#111A21',
+              700: '#18242D',
+              600: '#22313C',
+              500: '#31434F',
+            },
+            mint: {
+              DEFAULT: '#6FE3A3',
+              300: '#A7F0C6',
+              400: '#8AEAB4',
+              500: '#6FE3A3',
+              600: '#45C983',
+              700: '#2BA568',
+            },
+          },
+          fontFamily: {
+            sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            funky: ['"Baloo 2"', 'ui-rounded', 'cursive'],
+          },
+          letterSpacing: { widest2: '0.25em' },
+          boxShadow: {
+            mint: '0 18px 50px -18px rgba(111,227,163,0.45)',
+            card: '0 24px 60px -30px rgba(0,0,0,0.9)',
+          },
+          keyframes: {
+            floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-14px)' } },
+            spinslow: { to: { transform: 'rotate(360deg)' } },
+          },
+          animation: {
+            floaty: 'floaty 7s ease-in-out infinite',
+            spinslow: 'spinslow 22s linear infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Painted before Tailwind loads so there is no white flash. */
+    html { background-color: #0B1116; }
+    body { -webkit-font-smoothing: antialiased; }
+
+    ::selection { background: #6FE3A3; color: #07110B; }
+
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #0B1116; }
+    ::-webkit-scrollbar-thumb { background: #22313C; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2BA568; }
+
+    /* Monochrome brand glyphs, tinted with currentColor via a mask. */
+    .si {
+      display: inline-block;
+      background-color: currentColor;
+      -webkit-mask-image: var(--i); mask-image: var(--i);
+      -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+      -webkit-mask-position: center; mask-position: center;
+      -webkit-mask-size: contain; mask-size: contain;
+    }
+
+    .diagonal { clip-path: polygon(38% 0, 100% 0, 100% 100%, 12% 100%); }
+
+    .grid-lines {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
+    }
+
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+    .reveal.is-in { opacity: 1; transform: none; }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; left: 0; right: 100%; bottom: -6px; height: 2px;
+      background: #6FE3A3; transition: right .3s ease;
+    }
+    .nav-link:hover::after, .nav-link[aria-current="true"]::after { right: 0; }
+    .nav-link[aria-current="true"] { color: #6FE3A3; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .animate-floaty, .animate-spinslow { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-ink-900 text-slate-400 font-sans">
+
+  <a href="#home" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-mint focus:px-4 focus:py-2 focus:font-semibold focus:text-ink-950">Skip to content</a>
+
+  <!-- ══════════════════════════ HEADER ══════════════════════════ -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-colors duration-300">
+    <div class="mx-auto flex max-w-[1400px] items-stretch justify-between">
+
+      <!-- brand -->
+      <a href="#home" class="group flex items-center gap-4 pr-6">
+        <span class="grid h-16 w-16 place-items-center bg-mint text-ink-950 transition-transform duration-300 group-hover:scale-95 md:h-[72px] md:w-[72px]">
+          <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19 L12 5 L20 19" /><path d="M7.5 14 h9" />
+          </svg>
+        </span>
+        <span class="text-xl font-extrabold tracking-[0.18em] text-white md:text-2xl">ANWESH</span>
+      </a>
+
+      <!-- desktop nav -->
+      <nav class="hidden items-center gap-9 text-[13px] font-semibold uppercase tracking-[0.16em] text-slate-300 lg:flex" aria-label="Primary">
+        <a href="#home"     class="nav-link transition-colors hover:text-white">Home</a>
+        <a href="#about"    class="nav-link transition-colors hover:text-white">About</a>
+        <a href="#skills"   class="nav-link transition-colors hover:text-white">Skills</a>
+        <a href="#projects" class="nav-link transition-colors hover:text-white">Projects</a>
+        <a href="#contact"  class="nav-link transition-colors hover:text-white">Contact</a>
+      </nav>
+
+      <!-- menu button -->
+      <button id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu"
+              class="grid h-16 w-16 shrink-0 place-items-center bg-mint text-ink-950 transition hover:bg-mint-400 md:h-[72px] md:w-[72px]">
+        <span class="sr-only">Toggle navigation</span>
+        <svg id="icon-open" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <svg id="icon-close" viewBox="0 0 24 24" class="hidden h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- slide-down menu -->
+    <div id="mobile-menu" class="grid grid-rows-[0fr] overflow-hidden border-b border-white/5 bg-ink-800/95 backdrop-blur-xl transition-[grid-template-rows] duration-[400ms] ease-out">
+      <div class="min-h-0">
+        <nav class="mx-auto flex max-w-[1400px] flex-col gap-1 px-6 py-6" aria-label="Menu">
+          <a href="#home"     class="menu-link rounded-xl px-4 py-3 text-lg font-semibold uppercase tracking-[0.14em] text-slate-200 transition hover:bg-white/5 hover:text-mint">Home</a>
+          <a href="#about"    class="menu-link rounded-xl px-4 py-3 text-lg font-semibold uppercase tracking-[0.14em] text-slate-200 transition hover:bg-white/5 hover:text-mint">About</a>
+          <a href="#skills"   class="menu-link rounded-xl px-4 py-3 text-lg font-semibold uppercase tracking-[0.14em] text-slate-200 transition hover:bg-white/5 hover:text-mint">Skills</a>
+          <a href="#projects" class="menu-link rounded-xl px-4 py-3 text-lg font-semibold uppercase tracking-[0.14em] text-slate-200 transition hover:bg-white/5 hover:text-mint">Projects</a>
+          <a href="#contact"  class="menu-link rounded-xl px-4 py-3 text-lg font-semibold uppercase tracking-[0.14em] text-slate-200 transition hover:bg-white/5 hover:text-mint">Contact</a>
+          <div class="mt-4 flex gap-3 px-4">
+            <a href="https://github.com/Anwesh43" target="_blank" rel="noopener" class="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-slate-300 transition hover:border-mint hover:text-mint">
+              <span class="si h-5 w-5" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/github.svg')"></span><span class="sr-only">GitHub</span>
+            </a>
+            <a href="https://twitter.com/AnweshMthecool" target="_blank" rel="noopener" class="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-slate-300 transition hover:border-mint hover:text-mint">
+              <span class="si h-4 w-4" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/x.svg')"></span><span class="sr-only">X / Twitter</span>
+            </a>
+            <a href="https://www.facebook.com/anwesh.mishra.1" target="_blank" rel="noopener" class="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-slate-300 transition hover:border-mint hover:text-mint">
+              <span class="si h-5 w-5" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/facebook.svg')"></span><span class="sr-only">Facebook</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ══════════════════════════ HERO ══════════════════════════ -->
+    <section id="home" class="relative isolate flex items-center overflow-hidden pb-24 pt-36 md:pb-32 md:pt-44 lg:min-h-screen lg:py-32">
+      <!-- background -->
+      <div class="absolute inset-0 -z-10 bg-ink-900" aria-hidden="true"></div>
+      <div class="diagonal absolute inset-y-0 right-0 -z-10 w-[72%] bg-gradient-to-br from-ink-800 to-ink-900" aria-hidden="true"></div>
+      <div class="grid-lines absolute inset-0 -z-10" aria-hidden="true"></div>
+      <div class="absolute -right-24 top-1/4 -z-10 h-[520px] w-[520px] rounded-full bg-mint/10 blur-[140px]" aria-hidden="true"></div>
+      <div class="absolute -left-40 bottom-0 -z-10 h-[420px] w-[420px] rounded-full bg-mint/5 blur-[120px]" aria-hidden="true"></div>
+
+      <div class="mx-auto grid w-full max-w-[1400px] items-center gap-14 px-6 md:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+
+        <!-- copy -->
+        <div class="reveal max-w-2xl">
+          <p class="mb-6 inline-flex items-center gap-2.5 rounded-full border border-mint/25 bg-mint/[0.07] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-widest2 text-mint">
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-mint"></span>
+            </span>
+            Open to new projects
+          </p>
+
+          <h1 class="text-[2.6rem] font-extrabold uppercase leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-[4.6rem]">
+            Hi, I'm Anwesh!<br />
+            <span class="inline-flex flex-wrap items-baseline gap-x-3">
+              Full Stack
+              <span class="font-funky font-extrabold text-mint">Developer</span>
+            </span>
+          </h1>
+
+          <p class="mt-7 max-w-xl text-[15px] leading-relaxed text-slate-400 md:text-base">
+            I build things end to end — React and Angular on the front, Node.js and Go on the back,
+            MongoDB underneath, and Android when the idea belongs in a pocket. I care about interfaces
+            that feel obvious and code that stays readable six months later. I take life as it comes.
+          </p>
+
+          <div class="mt-10 flex flex-wrap items-center gap-5 sm:gap-8">
+            <a href="https://github.com/Anwesh43" target="_blank" rel="noopener"
+               class="group inline-flex items-center gap-2.5 bg-mint px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-ink-950 shadow-mint transition hover:-translate-y-0.5 hover:bg-mint-400">
+              View GitHub
+              <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17 17 7M9 7h8v8" />
+              </svg>
+            </a>
+
+            <a href="#projects" class="group inline-flex items-center gap-4 text-sm font-semibold text-white">
+              <span class="grid h-12 w-12 place-items-center rounded-full bg-mint text-ink-950 transition group-hover:scale-105">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
+              </span>
+              <span class="border-b border-transparent pb-0.5 transition group-hover:border-mint">See My Work</span>
+            </a>
+          </div>
         </div>
-        <script src="./bundle.js">
-        </script>
-    </body>
+
+        <!-- portrait -->
+        <div class="reveal relative mx-auto w-full max-w-[420px] lg:max-w-[520px]">
+          <div class="animate-floaty">
+            <svg viewBox="0 0 440 480" class="w-full drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)]" role="img" aria-label="Portrait of Anwesh Mishra">
+              <defs>
+                <pattern id="portrait" patternUnits="userSpaceOnUse" x="43" y="47" width="354" height="386">
+                  <image href="img/anweshm.jpg" x="0" y="0" width="354" height="386" preserveAspectRatio="xMidYMid slice" />
+                </pattern>
+                <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%"   stop-color="#A7F0C6" />
+                  <stop offset="55%"  stop-color="#6FE3A3" />
+                  <stop offset="100%" stop-color="#2BA568" />
+                </linearGradient>
+              </defs>
+
+              <!-- outer ring -->
+              <polygon points="110,20 330,20 420,240 330,460 110,460 20,240"
+                       fill="none" stroke="url(#ring)" stroke-width="20" stroke-linejoin="round" />
+
+              <!-- photo, rounded by stroking the shape with its own fill -->
+              <polygon points="132,64 308,64 380,240 308,416 132,416 60,240"
+                       fill="url(#portrait)" stroke="url(#portrait)" stroke-width="34" stroke-linejoin="round" />
+            </svg>
+          </div>
+
+          <!-- floating badge -->
+          <div class="absolute -bottom-4 -left-2 grid h-24 w-24 place-items-center rounded-full border border-mint/30 bg-ink-800/90 backdrop-blur md:h-28 md:w-28 lg:-left-8">
+            <svg viewBox="0 0 100 100" class="absolute inset-0 h-full w-full animate-spinslow" aria-hidden="true">
+              <defs><path id="badgearc" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" /></defs>
+              <text class="fill-mint/70" style="font-size:10.5px;letter-spacing:2.2px;font-weight:600">
+                <textPath href="#badgearc">FULL STACK • DEVELOPER • </textPath>
+              </text>
+            </svg>
+            <svg viewBox="0 0 24 24" class="h-8 w-8 text-mint" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m8 16-4-4 4-4M16 8l4 4-4 4M13.5 5l-3 14" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════ MARQUEE ══════════════════════════ -->
+    <div class="border-y border-white/5 bg-ink-800/60 py-5">
+      <div class="mx-auto flex max-w-[1400px] flex-wrap items-center justify-center gap-x-10 gap-y-3 px-6 text-[11px] font-semibold uppercase tracking-widest2 text-slate-500">
+        <span>JavaScript</span><span class="text-mint/50">◆</span>
+        <span>React</span><span class="text-mint/50">◆</span>
+        <span>Node.js</span><span class="text-mint/50">◆</span>
+        <span>Go</span><span class="text-mint/50">◆</span>
+        <span>MongoDB</span><span class="text-mint/50">◆</span>
+        <span>Android</span><span class="text-mint/50">◆</span>
+        <span>Python</span><span class="text-mint/50">◆</span>
+        <span>Agentic AI</span>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════ ABOUT ══════════════════════════ -->
+    <section id="about" class="relative scroll-mt-24 py-24 md:py-32">
+      <div class="mx-auto max-w-[1400px] px-6 md:px-10">
+        <div class="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+
+          <div class="reveal relative">
+            <div class="relative overflow-hidden rounded-[2rem] border border-white/5">
+              <img src="img/code.png" alt="" class="h-[360px] w-full object-cover opacity-70 md:h-[460px]" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent"></div>
+            </div>
+            <div class="absolute -bottom-6 -right-2 rounded-2xl border border-mint/20 bg-ink-800 px-7 py-6 shadow-card md:right-6">
+              <p class="text-4xl font-extrabold text-mint">9+</p>
+              <p class="mt-1 text-[11px] font-semibold uppercase tracking-widest2 text-slate-500">Years<br />shipping code</p>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <p class="mb-4 text-[11px] font-bold uppercase tracking-widest2 text-mint">About me</p>
+            <h2 class="text-3xl font-extrabold uppercase leading-tight text-white md:text-5xl">
+              A developer who<br /><span class="font-funky text-mint">ships things</span>
+            </h2>
+            <p class="mt-7 leading-relaxed text-slate-400">
+              I'm Anwesh Mishra, a full stack developer. Most of my work lives in the space between a
+              rough idea and something people can actually open — web apps, Android apps, the APIs and
+              databases holding them up, and the odd generative-art experiment when I want to think
+              in shapes instead of sentences.
+            </p>
+            <p class="mt-4 leading-relaxed text-slate-400">
+              I like small, legible codebases, interfaces that don't need a manual, and problems that
+              are still a little bit unsolved. I take life as it comes.
+            </p>
+
+            <dl class="mt-9 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+              <div class="border-l-2 border-mint/40 pl-4">
+                <dt class="text-[11px] font-semibold uppercase tracking-widest2 text-slate-500">Focus</dt>
+                <dd class="mt-1 font-medium text-white">Web &amp; Android</dd>
+              </div>
+              <div class="border-l-2 border-mint/40 pl-4">
+                <dt class="text-[11px] font-semibold uppercase tracking-widest2 text-slate-500">Stack</dt>
+                <dd class="mt-1 font-medium text-white">JS · Go · Node · Mongo</dd>
+              </div>
+              <div class="border-l-2 border-mint/40 pl-4">
+                <dt class="text-[11px] font-semibold uppercase tracking-widest2 text-slate-500">Open source</dt>
+                <dd class="mt-1 font-medium text-white">
+                  <a href="https://github.com/Anwesh43" target="_blank" rel="noopener" class="transition hover:text-mint">github.com/Anwesh43</a>
+                </dd>
+              </div>
+              <div class="border-l-2 border-mint/40 pl-4">
+                <dt class="text-[11px] font-semibold uppercase tracking-widest2 text-slate-500">Availability</dt>
+                <dd class="mt-1 font-medium text-white">Open to new projects</dd>
+              </div>
+            </dl>
+
+            <a href="#contact" class="mt-10 inline-flex items-center gap-2.5 border border-mint/40 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-mint transition hover:bg-mint hover:text-ink-950">
+              Let's talk
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════ SKILLS ══════════════════════════ -->
+    <section id="skills" class="relative scroll-mt-24 overflow-hidden border-y border-white/5 bg-ink-800/40 py-24 md:py-32">
+      <div class="absolute left-1/2 top-0 -z-10 h-72 w-[680px] -translate-x-1/2 rounded-full bg-mint/[0.07] blur-[120px]" aria-hidden="true"></div>
+
+      <div class="mx-auto max-w-[1400px] px-6 md:px-10">
+        <div class="reveal mx-auto mb-16 max-w-2xl text-center">
+          <p class="mb-4 text-[11px] font-bold uppercase tracking-widest2 text-mint">What I work with</p>
+          <h2 class="text-3xl font-extrabold uppercase leading-tight text-white md:text-5xl">
+            Skills &amp; <span class="font-funky text-mint">Tooling</span>
+          </h2>
+          <p class="mt-5 text-slate-400">The stack I reach for, front to back.</p>
+        </div>
+
+        <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <!-- Each tile: brand glyph masked to currentColor so everything stays on-theme. -->
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <span class="si h-10 w-10 text-slate-400 transition group-hover:text-mint" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/react.svg')"></span>
+            <h3 class="mt-5 font-semibold text-white">React</h3>
+            <p class="mt-1 text-sm text-slate-500">Component UIs &amp; SPAs</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <span class="si h-10 w-10 text-slate-400 transition group-hover:text-mint" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/angular.svg')"></span>
+            <h3 class="mt-5 font-semibold text-white">Angular</h3>
+            <p class="mt-1 text-sm text-slate-500">Structured front ends</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <span class="si h-10 w-10 text-slate-400 transition group-hover:text-mint" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/nodedotjs.svg')"></span>
+            <h3 class="mt-5 font-semibold text-white">Node.js</h3>
+            <p class="mt-1 text-sm text-slate-500">APIs &amp; services</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <span class="si h-10 w-10 text-slate-400 transition group-hover:text-mint" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/go.svg')"></span>
+            <h3 class="mt-5 font-semibold text-white">Go</h3>
+            <p class="mt-1 text-sm text-slate-500">Fast, boring backends</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <span class="si h-10 w-10 text-slate-400 transition group-hover:text-mint" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/mongodb.svg')"></span>
+            <h3 class="mt-5 font-semibold text-white">MongoDB</h3>
+            <p class="mt-1 text-sm text-slate-500">Document data modelling</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <span class="si h-10 w-10 text-slate-400 transition group-hover:text-mint" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/android.svg')"></span>
+            <h3 class="mt-5 font-semibold text-white">Android</h3>
+            <p class="mt-1 text-sm text-slate-500">Native mobile apps</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <span class="si h-10 w-10 text-slate-400 transition group-hover:text-mint" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/javascript.svg')"></span>
+            <h3 class="mt-5 font-semibold text-white">JavaScript</h3>
+            <p class="mt-1 text-sm text-slate-500">ES6+ every day</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <span class="si h-10 w-10 text-slate-400 transition group-hover:text-mint" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/tailwindcss.svg')"></span>
+            <h3 class="mt-5 font-semibold text-white">Tailwind CSS</h3>
+            <p class="mt-1 text-sm text-slate-500">Design systems, fast</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <span class="si h-10 w-10 text-slate-400 transition group-hover:text-mint" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/python.svg')"></span>
+            <h3 class="mt-5 font-semibold text-white">Python</h3>
+            <p class="mt-1 text-sm text-slate-500">Scripting, data &amp; ML</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <svg viewBox="0 0 24 24" class="h-10 w-10 text-slate-400 transition group-hover:text-mint" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3a3 3 0 0 0-3 3 3 3 0 0 0-2.4 4.8A3 3 0 0 0 7.8 16 3 3 0 0 0 12 18.6V3Z" />
+              <path d="M12 3a3 3 0 0 1 3 3 3 3 0 0 1 2.4 4.8A3 3 0 0 1 16.2 16 3 3 0 0 1 12 18.6" />
+              <path d="M12 18.6V21" />
+              <path d="M9 6.5h1.5M13.5 6.5H15M8.2 11h2M14 11h2" />
+            </svg>
+            <h3 class="mt-5 font-semibold text-white">AI</h3>
+            <p class="mt-1 text-sm text-slate-500">LLM apps, RAG &amp; prompting</p>
+          </li>
+          <li class="reveal group relative overflow-hidden rounded-2xl border border-white/5 bg-ink-800 p-6 transition duration-300 hover:-translate-y-1 hover:border-mint/40 hover:bg-ink-700">
+            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-mint/60 to-transparent opacity-0 transition group-hover:opacity-100"></div>
+            <svg viewBox="0 0 24 24" class="h-10 w-10 text-slate-400 transition group-hover:text-mint" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="5" r="2.4" />
+              <circle cx="4.5" cy="18.5" r="2.4" />
+              <circle cx="12" cy="18.5" r="2.4" />
+              <circle cx="19.5" cy="18.5" r="2.4" />
+              <path d="M12 7.4v8.7M10.4 6.8 5.9 16.6M13.6 6.8l4.5 9.8" />
+            </svg>
+            <h3 class="mt-5 font-semibold text-white">Agentic AI</h3>
+            <p class="mt-1 text-sm text-slate-500">Tool-using autonomous agents</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════ PROJECTS ══════════════════════════ -->
+    <!--
+      TODO (Anwesh): the three cards below are scaffolding built around images already in the repo.
+      Swap the titles, blurbs, tags and links for your real projects.
+    -->
+    <section id="projects" class="relative scroll-mt-24 py-24 md:py-32">
+      <div class="mx-auto max-w-[1400px] px-6 md:px-10">
+        <div class="reveal mb-16 flex flex-wrap items-end justify-between gap-6">
+          <div class="max-w-xl">
+            <p class="mb-4 text-[11px] font-bold uppercase tracking-widest2 text-mint">Selected work</p>
+            <h2 class="text-3xl font-extrabold uppercase leading-tight text-white md:text-5xl">
+              Recent <span class="font-funky text-mint">Projects</span>
+            </h2>
+          </div>
+          <a href="https://github.com/Anwesh43?tab=repositories" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em] text-mint transition hover:text-mint-300">
+            All repositories
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+          <article class="reveal group relative overflow-hidden rounded-[1.75rem] border border-white/5 bg-ink-800 transition duration-300 hover:-translate-y-1.5 hover:border-mint/30">
+            <div class="relative h-56 overflow-hidden">
+              <img src="hackathonImages/workout.jpg" alt="" class="h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-800 via-ink-800/30 to-transparent"></div>
+              <span class="absolute left-5 top-5 rounded-full bg-mint px-3 py-1 text-[10px] font-bold uppercase tracking-widest2 text-ink-950">Hackathon</span>
+            </div>
+            <div class="p-7">
+              <h3 class="text-xl font-bold text-white transition group-hover:text-mint">Healthy Living</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-400">
+                A wellness companion built during a hackathon — habit tracking across workouts,
+                diet, running and breathing exercises.
+              </p>
+              <ul class="mt-5 flex flex-wrap gap-2">
+                <li class="rounded-full border border-white/10 px-3 py-1 text-[11px] font-medium text-slate-400">React</li>
+                <li class="rounded-full border border-white/10 px-3 py-1 text-[11px] font-medium text-slate-400">Node.js</li>
+                <li class="rounded-full border border-white/10 px-3 py-1 text-[11px] font-medium text-slate-400">MongoDB</li>
+              </ul>
+              <a href="https://github.com/Anwesh43" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-mint">
+                View project
+                <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="reveal group relative overflow-hidden rounded-[1.75rem] border border-white/5 bg-ink-800 transition duration-300 hover:-translate-y-1.5 hover:border-mint/30">
+            <div class="relative h-56 overflow-hidden">
+              <img src="hackathonImages/diet.jpg" alt="" class="h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-800 via-ink-800/30 to-transparent"></div>
+              <span class="absolute left-5 top-5 rounded-full bg-mint px-3 py-1 text-[10px] font-bold uppercase tracking-widest2 text-ink-950">Health</span>
+            </div>
+            <div class="p-7">
+              <h3 class="text-xl font-bold text-white transition group-hover:text-mint">Diabetes Care</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-400">
+                Diet and lifestyle guidance for people managing diabetes, with meal plans that
+                adapt to what you actually eat.
+              </p>
+              <ul class="mt-5 flex flex-wrap gap-2">
+                <li class="rounded-full border border-white/10 px-3 py-1 text-[11px] font-medium text-slate-400">Android</li>
+                <li class="rounded-full border border-white/10 px-3 py-1 text-[11px] font-medium text-slate-400">Go</li>
+              </ul>
+              <a href="https://github.com/Anwesh43" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-mint">
+                View project
+                <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="reveal group relative overflow-hidden rounded-[1.75rem] border border-white/5 bg-ink-800 transition duration-300 hover:-translate-y-1.5 hover:border-mint/30 md:col-span-2 lg:col-span-1">
+            <div class="relative h-56 overflow-hidden">
+              <img src="img/tech.jpg" alt="" class="h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-800 via-ink-800/30 to-transparent"></div>
+              <span class="absolute left-5 top-5 rounded-full bg-mint px-3 py-1 text-[10px] font-bold uppercase tracking-widest2 text-ink-950">Tool</span>
+            </div>
+            <div class="p-7">
+              <h3 class="text-xl font-bold text-white transition group-hover:text-mint">Icon Creator</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-400">
+                A small browser tool for generating app icons — no upload, no account, everything
+                happens on the canvas in front of you.
+              </p>
+              <ul class="mt-5 flex flex-wrap gap-2">
+                <li class="rounded-full border border-white/10 px-3 py-1 text-[11px] font-medium text-slate-400">JavaScript</li>
+                <li class="rounded-full border border-white/10 px-3 py-1 text-[11px] font-medium text-slate-400">Canvas</li>
+              </ul>
+              <a href="icon_creator.html" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-mint">
+                Open the tool
+                <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════ CONTACT ══════════════════════════ -->
+    <section id="contact" class="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
+      <div class="mx-auto max-w-[1400px] px-6 md:px-10">
+        <div class="reveal relative overflow-hidden rounded-[2.5rem] border border-mint/15 bg-ink-800 px-8 py-16 text-center md:px-16 md:py-24">
+          <div class="absolute -top-32 left-1/2 -z-10 h-80 w-[640px] -translate-x-1/2 rounded-full bg-mint/15 blur-[120px]" aria-hidden="true"></div>
+          <div class="grid-lines absolute inset-0 -z-10" aria-hidden="true"></div>
+
+          <p class="mb-4 text-[11px] font-bold uppercase tracking-widest2 text-mint">Keep in touch</p>
+          <h2 class="mx-auto max-w-3xl text-3xl font-extrabold uppercase leading-tight text-white md:text-6xl">
+            Got something to<br /><span class="font-funky text-mint">build together?</span>
+          </h2>
+          <p class="mx-auto mt-6 max-w-lg text-slate-400">
+            Freelance work, a side project, or just a good technical argument — my inbox is open.
+          </p>
+
+          <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <a href="mailto:anweshthecool0@gmail.com"
+               class="inline-flex items-center gap-2.5 bg-mint px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-ink-950 shadow-mint transition hover:-translate-y-0.5 hover:bg-mint-400">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+              Say hello
+            </a>
+            <a href="https://github.com/Anwesh43" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2.5 border border-white/15 px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-mint hover:text-mint">
+              <span class="si h-4 w-4" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/github.svg')"></span>
+              GitHub
+            </a>
+          </div>
+
+          <div class="mt-12 flex items-center justify-center gap-4">
+            <a href="https://twitter.com/AnweshMthecool" target="_blank" rel="noopener"
+               class="grid h-12 w-12 place-items-center rounded-full border border-white/10 text-slate-400 transition hover:-translate-y-1 hover:border-mint hover:text-mint">
+              <span class="si h-4 w-4" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/x.svg')"></span><span class="sr-only">X / Twitter</span>
+            </a>
+            <a href="https://www.facebook.com/anwesh.mishra.1" target="_blank" rel="noopener"
+               class="grid h-12 w-12 place-items-center rounded-full border border-white/10 text-slate-400 transition hover:-translate-y-1 hover:border-mint hover:text-mint">
+              <span class="si h-5 w-5" style="--i:url('https://cdn.jsdelivr.net/npm/simple-icons@13/icons/facebook.svg')"></span><span class="sr-only">Facebook</span>
+            </a>
+            <a href="mailto:anweshthecool0@gmail.com"
+               class="grid h-12 w-12 place-items-center rounded-full border border-white/10 text-slate-400 transition hover:-translate-y-1 hover:border-mint hover:text-mint">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+              <span class="sr-only">Email</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+  <footer class="border-t border-white/5 bg-ink-950">
+    <div class="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-6 px-6 py-10 md:flex-row md:px-10">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center bg-mint text-ink-950">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19 L12 5 L20 19" /><path d="M7.5 14 h9" /></svg>
+        </span>
+        <span class="text-sm font-bold tracking-[0.18em] text-white">ANWESH</span>
+      </div>
+
+      <p class="text-xs text-slate-500">© <span id="year">2026</span> Anwesh Mishra. Built with Tailwind CSS.</p>
+
+      <nav class="flex gap-6 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500" aria-label="Footer">
+        <a href="privacypolicy.htm" class="transition hover:text-mint">Privacy</a>
+        <a href="icon_creator.html" class="transition hover:text-mint">Icon Creator</a>
+        <a href="#home" class="transition hover:text-mint">Top ↑</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      /* ---- year ---- */
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      /* ---- slide-down menu ---- */
+      var btn = document.getElementById('menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      var iconOpen = document.getElementById('icon-open');
+      var iconClose = document.getElementById('icon-close');
+
+      function setMenu(open) {
+        btn.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('grid-rows-[1fr]', open);
+        menu.classList.toggle('grid-rows-[0fr]', !open);
+        iconOpen.classList.toggle('hidden', open);
+        iconClose.classList.toggle('hidden', !open);
+      }
+
+      btn.addEventListener('click', function () {
+        setMenu(btn.getAttribute('aria-expanded') !== 'true');
+      });
+      menu.querySelectorAll('.menu-link').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setMenu(false);
+      });
+
+      /* ---- header background on scroll ---- */
+      var header = document.getElementById('site-header');
+      function onScroll() {
+        header.classList.toggle('bg-ink-900/85', window.scrollY > 24);
+        header.classList.toggle('backdrop-blur-xl', window.scrollY > 24);
+        header.classList.toggle('shadow-card', window.scrollY > 24);
+      }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      /* ---- reveal on scroll ---- */
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var reveals = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('is-in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry, i) {
+            if (!entry.isIntersecting) return;
+            var el = entry.target;
+            setTimeout(function () { el.classList.add('is-in'); }, i * 70);
+            io.unobserve(el);
+          });
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+        reveals.forEach(function (el) { io.observe(el); });
+      }
+
+      /* ---- scrollspy ---- */
+      var links = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+      var sections = links
+        .map(function (l) { return document.querySelector(l.getAttribute('href')); })
+        .filter(Boolean);
+
+      if ('IntersectionObserver' in window) {
+        var spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            links.forEach(function (l) {
+              l.setAttribute('aria-current', String(l.getAttribute('href') === '#' + entry.target.id));
+            });
+          });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        sections.forEach(function (s) { spy.observe(s); });
+      }
+    })();
+  </script>
+</body>
 </html>
